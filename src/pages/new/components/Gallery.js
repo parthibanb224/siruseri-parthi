@@ -14,13 +14,13 @@ import exterior2 from "../../../../public/nlpImages/Exterior/Exterior 2.jpg";
 import exterior3 from "../../../../public/nlpImages/Exterior/Exterior 3.jpg";
 import exterior4 from "../../../../public/nlpImages/Exterior/Exterior 4.jpg";
 import interior1 from "../../../../public/Images-new/interier1.jpg";
-import interior2 from "../../../../public/Images-new/Interier2.jpg";
-import interior3 from "../../../../public/Images-new/Interier3.jpg";
-import interior4 from "../../../../public/Images-new/Interier4.jpg";
-import interior5 from "../../../../public/Images-new/Interier5.jpg";
-import interior6 from "../../../../public/Images-new/Interier6.jpg";
-import interior7 from "../../../../public/Images-new/Interier7.jpg";
-import interior8 from "../../../../public/Images-new/Interier8.jpg";
+import interior2 from "../../../../public/Images-new/interier2.jpg";
+import interior3 from "../../../../public/Images-new/interier3.jpg";
+import interior4 from "../../../../public/Images-new/interier4.jpg";
+import interior5 from "../../../../public/Images-new/interier5.jpg";
+import interior6 from "../../../../public/Images-new/interier6.jpg";
+import interior7 from "../../../../public/Images-new/interier7.jpg";
+import interior8 from "../../../../public/Images-new/interier8.jpg";
 
 const data = [
   {
