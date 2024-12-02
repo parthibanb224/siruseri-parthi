@@ -33,7 +33,7 @@ export default function WalkThrough({}) {
       xl={content?.containerCol?.xl}
       sx={{
         // backgroundColor:"#F1F0E8",
-        backgroundImage: "url('/Images/walkway-bg.png')",
+        backgroundImage: "url('/images/walkway-bg.png')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         display: "flex",
@@ -53,7 +53,7 @@ export default function WalkThrough({}) {
           component="h1"
           sx={{
             padding: "20px 0 10px 0",
-            fontSize: { xs: "14px", sm: "35px" },
+            fontSize: { xs: "20px", sm: "35px" },
             fontWeight: "bolder",
             // background:
             //   "linear-gradient(90deg, rgba(21,100,53,1) 0%, rgba(0,162,216,1) 50%)",
@@ -79,7 +79,7 @@ export default function WalkThrough({}) {
           component="h1"
           sx={{
             color: "#FFFFFF",
-            padding: "3px 0 10px 0",
+            padding: "1px 0 10px 0",
             fontSize: { xs: "14px", sm: "16px" },
           }}
         >

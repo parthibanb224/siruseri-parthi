@@ -1,8 +1,9 @@
 import { Grid, Typography } from "@mui/material";
 import React, { useEffect } from "react";
+import gsap from "gsap";
 import Image from "next/image";
 import Img1 from "../../../../public/Images-new/Elevation1.jpg";
-import gsap from "gsap";
+import Img2 from "../../../../public/Images-new/igbc.png";
 
 export default function Overview() {
   useEffect(() => {
@@ -32,9 +33,15 @@ export default function Overview() {
       xs={12}
       justifyContent={"center"}
       alignItems={"center"}
-      sx={{ paddingY: "70px" }}
+      sx={{ paddingY: { md: "70px", xs: "40px" } }}
     >
-      <Grid container item xs={6}>
+      <Grid
+        container
+        item
+        xs={6}
+        id="text-section"
+        sx={{ position: "relative" }}
+      >
         <Grid
           container
           item
@@ -44,7 +51,7 @@ export default function Overview() {
           justifyContent="center"
           sx={{
             display: { xs: "none", md: "flex" },
-            height: { xs: "35px", sm: "400px" },
+            height: { xs: "35px", sm: "450px" },
             overflow: "hidden",
             position: "relative",
           }}
@@ -61,48 +68,84 @@ export default function Overview() {
             sizes="100vw"
           />
         </Grid>
+        <Grid
+          container
+          item
+          xs={3.5}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          sx={{
+            display: { xs: "none", md: "flex" },
+            height: { xs: "35px", sm: "100px" },
+            overflow: "hidden",
+            position: "absolute",
+            top: 0,
+            left: 0,
+          }}
+        >
+          <Image
+            src={Img2}
+            alt="logo"
+            style={{
+              height: "100%",
+              width: "auto",
+              objectFit: "cover",
+              borderRadius: "10px",
+            }}
+            sizes="100vw"
+          />
+        </Grid>
       </Grid>
-      <Grid
-        container
-        item
-        xs={11}
-        md={5.5}
-        id="text-section"
-        flexDirection="column"
-        spacing={2}
-      >
-        <Grid container item xs={12} marginBottom={"30px"}>
+      <Grid container item xs={11} md={5.5} flexDirection="column" spacing={2}>
+        <Grid container item xs={12} marginBottom="30px">
           <Typography
             sx={{
-              fontSize: "25px",
+              fontSize: { xs: "25px", md: "30px" },
               marginBottom: "30px",
               fontWeight: "bold",
               background:
                 "linear-gradient(90deg, rgba(21,100,53,1) 0%, rgba(0,162,216,1) 50%)",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
+              textAlign: "center",
             }}
           >
             Urbanrise The World of Joy: Where Luxury Meets Nature
           </Typography>
-          <Typography sx={{ textAlign: "justify" }}>
-            ★Discover modern living redefined at Urbanrise The World of Joy,
+          <Typography
+            sx={{
+              textAlign: "justify",
+              marginBottom: "10px",
+            }}
+          >
+            Discover modern living redefined at Urbanrise The World of Joy,
             located in Chennai's thriving OMR corridor. Strategically set near
             SIPCOT IT Park in Siruseri and surrounded by the serene 3,500-acre
             Karanai Forest, this premium gated community offers IGBC-certified
             2BHK and 3BHK apartments.
           </Typography>{" "}
-          <Typography sx={{ textAlign: "justify" }}>
-            ★ With lush greenery, vast open spaces, air-conditioned interiors,
+          <Typography
+            sx={{
+              textAlign: "justify",
+              marginBottom: "10px",
+            }}
+          >
+            With lush greenery, vast open spaces, air-conditioned interiors,
             wardrobes, and modular kitchens, these furnished homes are designed
             for unparalleled comfort and eco-friendly living.
           </Typography>{" "}
-          <Typography sx={{ textAlign: "justify" }}>
-            ★Welcome to a lifestyle where every element is thoughtfully
+          <Typography
+            sx={{
+              textAlign: "justify",
+              marginBottom: "7px",
+            }}
+          >
+            Welcome to a lifestyle where every element is thoughtfully
             reimagined for your convenience.
           </Typography>{" "}
         </Grid>
-        <Grid container item xs={12} spacing={3}>
+        <Grid container item xs={12} spacing={5}>
           <Grid container item xs={6} md={3} spacing={1}>
             <Grid container item xs={12} justifyContent={"center"}>
               <Typography sx={{ fontSize: "20px", fontWeight: "bold" }}>

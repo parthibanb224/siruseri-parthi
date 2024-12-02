@@ -1,102 +1,65 @@
 import { Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
+import gsap from "gsap";
 import Image from "next/image";
-import React from "react";
-import Img1 from "../../../../public/Images-new/4-1-768x559.webp";
+import React, { useEffect, useRef } from "react";
+import Img1 from "../../../../public/Images-new/4-1-768x559.jpg";
 import Img2 from "../../../../public/Images-new/Co-working-Spaces-1-768x432.jpg";
-import Img3 from "../../../../public/Images-new/2-2-768x559.webp";
-import Img4 from "../../../../public/Images-new/1-4-768x559.webp";
+import Img3 from "../../../../public/Images-new/2-2-768x559.jpg";
+import Img4 from "../../../../public/Images-new/1-4-768x559.jpg";
 
-const ImageSection = ({ imgSrc }) => (
-  <Grid
-    id="amenities"
-    container
-    item
-    xs={12}
-    md={6}
-    display="flex"
-    alignItems="center"
-    justifyContent="center"
-    sx={{
-      height: { xs: "350px", sm: "500px" },
-      overflow: "hidden",
-      position: "relative",
-      borderRadius: "30px",
-    }}
-  >
-    <Image
-      src={imgSrc}
-      alt="Walkway Image"
-      style={{
-        height: "100%",
-        width: "auto",
-        objectFit: "cover",
-        borderRadius: "30px",
-      }}
-      sizes="100vw"
-    />
-  </Grid>
-);
+if (typeof window !== "undefined") {
+  import("gsap/ScrollTrigger").then((ScrollTrigger) => {
+    gsap.registerPlugin(ScrollTrigger.ScrollTrigger);
+  });
+}
 
-const TextSection = ({ title, content, border }) => (
-  <Grid
-    container
-    item
-    xs={12}
-    md={5.5}
-    sx={{
-      height: "100%",
-      padding: { md: "0 50px", xs: "0" },
-      [border]: { md: "1px solid #FFFFFF", xs: "0" },
-    }}
-  >
-    <Typography
-      sx={{
-        color: "#FFFFFF",
-        fontSize: "25px",
-        textAlign: "justify",
-        marginBottom: "40px",
-        marginTop: { md: 0, xs: "30px" },
-      }}
-    >
-      {title}
-    </Typography>
-    <Typography
-      sx={{ color: "#FFFFFF", fontSize: "20px", textAlign: "justify" }}
-    >
-      {content}
-    </Typography>
-  </Grid>
-);
-
-const Section = ({ imgSrc, title, content, reverse }) => {
+export default function Walkin() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-  return (
-    <Grid
-      container
-      item
-      xs={12}
-      justifyContent="space-between"
-      alignItems="center"
-      paddingY="50px"
-    >
-      {isMobile || !reverse ? (
-        <>
-          <ImageSection imgSrc={imgSrc} />
-          <TextSection title={title} content={content} border="borderLeft" />
-        </>
-      ) : (
-        <>
-          <TextSection title={title} content={content} border="borderRight" />
-          <ImageSection imgSrc={imgSrc} />
-        </>
-      )}
-    </Grid>
-  );
-};
+  const sectionRef = useRef([]);
 
-export default function Walkin() {
+  // useEffect(() => {
+  //   sectionRef.current.forEach((section, index) => {
+  //     const text = section.querySelector(".text");
+  //     const image = section.querySelector(".image");
+
+  //     gsap.fromTo(
+  //       text,
+  //       { x: "-100%", opacity: 0 },
+  //       {
+  //         x: "0%",
+  //         opacity: 1,
+  //         duration: 1.5,
+  //         ease: "power3.out",
+  //         scrollTrigger: {
+  //           trigger: text,
+  //           start: "top 80%",
+  //           end: "bottom 50%",
+  //           toggleActions: "play none none none",
+  //         },
+  //       }
+  //     );
+
+  //     gsap.fromTo(
+  //       image,
+  //       { x: window.innerWidth, opacity: 0 },
+  //       {
+  //         x: "0%",
+  //         opacity: 1,
+  //         duration: 1.5,
+  //         ease: "power3.out",
+  //         scrollTrigger: {
+  //           trigger: image,
+  //           start: "top 80%",
+  //           end: "bottom 50%",
+  //           toggleActions: "play none none none",
+  //         },
+  //       }
+  //     );
+  //   });
+  // }, []);
+
   const sections = [
     {
       imgSrc: Img1,
@@ -134,10 +97,10 @@ export default function Walkin() {
       item
       xs={12}
       alignItems="center"
-      justifyContent={"center"}
+      justifyContent="center"
       sx={{
         padding: "60px 20px",
-        backgroundImage: "url('/Images/walkway-bg.png')",
+        backgroundImage: "url('/images/walkway-bg.png')",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -145,13 +108,9 @@ export default function Walkin() {
       <Typography
         sx={{
           textAlign: "center",
-          fontSize: { xs: "30px", md: "35px" },
+          fontSize: { xs: "27px", md: "35px" },
           fontWeight: "bold",
           color: "#FFFFFF",
-          // background:
-          //   "linear-gradient(90deg, rgba(21,100,53,1) 0%, rgba(0,162,216,1) 50%)",
-          // WebkitTextFillColor: "transparent",
-          // backgroundClip: "text",
           marginBottom: "10px",
         }}
       >
@@ -159,7 +118,145 @@ export default function Walkin() {
       </Typography>
       {sections.map((section, index) => (
         <React.Fragment key={index}>
-          <Section {...section} />
+          <Grid
+            ref={(el) => (sectionRef.current[index] = el)}
+            container
+            item
+            xs={12}
+            justifyContent="space-between"
+            alignItems="center"
+            paddingY="50px"
+          >
+            {isMobile || !section.reverse ? (
+              <>
+                <Grid
+                  className="image"
+                  container
+                  item
+                  xs={12}
+                  md={6}
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  sx={{
+                    height: { xs: "250px", sm: "500px" },
+                    overflow: "hidden",
+                    position: "relative",
+                    borderRadius: "30px",
+                  }}
+                >
+                  <Image
+                    src={section.imgSrc}
+                    alt="Walkway Image"
+                    style={{
+                      height: "100%",
+                      width: "auto",
+                      objectFit: "cover",
+                      borderRadius: "30px",
+                    }}
+                    sizes="100vw"
+                  />
+                </Grid>
+                <Grid
+                  className="text"
+                  container
+                  item
+                  xs={12}
+                  md={5.5}
+                  sx={{
+                    height: "100%",
+                    padding: { md: "0 50px", xs: "0" },
+                    borderLeft: { md: "1px solid #FFFFFF", xs: "0" },
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      color: "#FFFFFF",
+                      fontSize: { md: "25px", xs: "18px" },
+                      textAlign: "left",
+                      marginBottom: "40px",
+                      marginTop: { md: 0, xs: "30px" },
+                    }}
+                  >
+                    {section.title}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      color: "#FFFFFF",
+                      fontSize: { md: "20px", xs: "14px" },
+                      textAlign: "justify",
+                    }}
+                  >
+                    {section.content}
+                  </Typography>
+                </Grid>
+              </>
+            ) : (
+              <>
+                <Grid
+                  className="text"
+                  container
+                  item
+                  xs={12}
+                  md={5.5}
+                  sx={{
+                    height: "100%",
+                    padding: { md: "0 50px", xs: "0" },
+                    borderRight: { md: "1px solid #FFFFFF", xs: "0" },
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      color: "#FFFFFF",
+                      fontSize: { md: "25px", xs: "18px" },
+                      textAlign: "left",
+                      marginBottom: "40px",
+                      marginTop: { md: 0, xs: "30px" },
+                    }}
+                  >
+                    {section.title}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      color: "#FFFFFF",
+                      fontSize: { md: "20px", xs: "14px" },
+                      textAlign: "justify",
+                    }}
+                  >
+                    {section.content}
+                  </Typography>
+                </Grid>
+                <Grid
+                  className="image"
+                  container
+                  item
+                  xs={12}
+                  md={6}
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  sx={{
+                    height: { xs: "250px", sm: "500px" },
+                    overflow: "hidden",
+                    position: "relative",
+                    borderRadius: "30px",
+                  }}
+                >
+                  <Image
+                    src={section.imgSrc}
+                    alt="Walkway Image"
+                    style={{
+                      height: "100%",
+                      width: "auto",
+                      objectFit: "cover",
+                      borderRadius: "30px",
+                    }}
+                    sizes="100vw"
+                  />
+                </Grid>
+              </>
+            )}
+          </Grid>
           <Grid
             container
             item
@@ -171,7 +268,7 @@ export default function Walkin() {
               justifyContent: "center",
               marginBottom: "60px",
             }}
-          ></Grid>
+          />
         </React.Fragment>
       ))}
     </Grid>

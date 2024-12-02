@@ -1,14 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
 import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectFade, Navigation, Pagination, Autoplay } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import ArrowBackIosRoundedIcon from "../../../../public/Images-new/double-left-unscreen.gif";
-import ArrowForwardIosRoundedIcon from "../../../../public/Images-new/double-right-unscreen.gif";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
+import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
+import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import exterior1 from "../../../../public/nlpImages/Exterior/Exterior 1.jpg";
 import exterior2 from "../../../../public/nlpImages/Exterior/Exterior 2.jpg";
 import exterior3 from "../../../../public/nlpImages/Exterior/Exterior 3.jpg";
@@ -97,7 +98,7 @@ export default function Gallery({}) {
       lg={content?.containerCol?.lg}
       xl={content?.containerCol?.xl}
       sx={{
-        padding: { xs: "0px 0 50px 0", sm: "20px 0 20px 0" },
+        padding: { xs: "30px 0 30px 0", sm: "20px 0 20px 0" },
         justifyContent: "center",
       }}
     >
@@ -114,7 +115,7 @@ export default function Gallery({}) {
           component="h1"
           sx={{
             padding: "10px 0 10px 0",
-            fontSize: { xs: "14px", sm: "35px" },
+            fontSize: { xs: "20px", sm: "35px" },
             fontWeight: "bolder",
             background:
               "linear-gradient(90deg, rgba(21,100,53,1) 0%, rgba(0,162,216,1) 50%)",
@@ -139,7 +140,7 @@ export default function Gallery({}) {
           component="h1"
           sx={{
             padding: "0px 0 10px 0",
-            fontSize: { xs: "14px", sm: "16px" },
+            fontSize: { xs: "13px", sm: "16px" },
           }}
         >
           {"Elegant Interiors and Captivating Exteriors Designed for You"}
@@ -220,12 +221,12 @@ export default function Gallery({}) {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              color: currentExpIdx === 0 ? "grey" : "#000000",
+              // color: currentExpIdx === 0 ? "grey" : "#000000",
               cursor: "pointer",
             }}
             onClick={() => sliderRef?.current?.slidePrev()}
           >
-            <Image src={ArrowBackIosRoundedIcon} alt="BackArrow" />
+            <ArrowBackIosRoundedIcon sx={{ fontSize: "20px" }} />
           </Grid>
         </Grid>
         <Grid
@@ -254,6 +255,11 @@ export default function Gallery({}) {
             <Swiper
               slidesPerView={1}
               spaceBetween={30}
+              loop={true}
+              autoplay={{
+                delay: 4000,
+                disableOnInteraction: false,
+              }}
               onSlideChange={(swiper) => {
                 const currIdx = swiper.activeIndex;
                 setCurrentExpIdx(currIdx);
@@ -261,6 +267,7 @@ export default function Gallery({}) {
               onSwiper={(sw) => {
                 sliderRef.current = sw;
               }}
+              modules={[EffectFade, Navigation, Pagination, Autoplay]}
               className="mySwiper"
               style={{ width: "100%", height: "100%" }}
             >
@@ -288,6 +295,77 @@ export default function Gallery({}) {
                     }}
                   >
                     <Image src={item} sizes="100vw" fill />
+                    <Grid
+                      container
+                      item
+                      xs={12}
+                      sx={{
+                        position: "absolute",
+                        width: "100%",
+                        height: "100%",
+                        justifyContent: "space-between",
+                        display: { xs: "flex", sm: "none" },
+                      }}
+                    >
+                      <Grid
+                        item
+                        xs={1}
+                        display="flex"
+                        justifyContent="flex-start"
+                        alignItems="center"
+                        sx={{
+                          height: "100%",
+                        }}
+                      >
+                        <Button
+                          onClick={() => sliderRef?.current?.slidePrev()}
+                          disabled={currentExpIdx === 0}
+                          sx={{
+                            background: "rgba(249, 184, 0, 0.7) !important",
+                            color: currentExpIdx === 0 ? "grey" : "#000000",
+                            boxShadow: "none !important",
+                            borderRadius: "50% !important",
+                            height: "60px",
+                            width: "40px",
+                          }}
+                          variant="contained"
+                        >
+                          <ArrowBackIosRoundedIcon sx={{ fontSize: "20px" }} />
+                        </Button>
+                      </Grid>
+                      <Grid
+                        item
+                        xs={1}
+                        display="flex"
+                        justifyContent="flex-end"
+                        alignItems="center"
+                        sx={{
+                          height: "100%",
+                        }}
+                      >
+                        <Button
+                          onClick={() => sliderRef?.current?.slideNext()}
+                          disabled={currentExpIdx === galleryImgList.length - 1}
+                          style={{
+                            background: "rgba(249, 184, 0, 0.7)",
+                            color:
+                              currentExpIdx === galleryImgList.length - 1
+                                ? "grey"
+                                : "#000000",
+                            boxShadow: "none",
+                            height: "60px",
+                            width: "40px",
+                            borderRadius: "50%",
+                            // border: "1px solid #000000",
+                          }}
+                          variant="contained"
+                        >
+                          <ArrowForwardIosRoundedIcon
+                            sx={{ fontSize: "20px" }}
+                          />
+                        </Button>
+                      </Grid>
+                    </Grid>
                   </Grid>
                 </SwiperSlide>
               ))}
@@ -311,15 +389,15 @@ export default function Gallery({}) {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              color:
-                currentExpIdx === galleryImgList?.length - 1
-                  ? "grey"
-                  : "#000000",
+              // color:
+              //   currentExpIdx === galleryImgList?.length - 1
+              //     ? "grey"
+              //     : "#000000",
               cursor: "pointer",
             }}
             onClick={() => sliderRef?.current?.slideNext()}
           >
-            <Image src={ArrowForwardIosRoundedIcon} alt="NextArrow" />
+            <ArrowForwardIosRoundedIcon sx={{ fontSize: "20px" }} />
           </Grid>
         </Grid>
       </Grid>

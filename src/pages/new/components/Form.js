@@ -83,7 +83,13 @@ const Form = () => {
             variant="h4"
             align="center"
             gutterBottom
-            sx={{ fontWeight: "bold", color: "#0d6efd" }}
+            sx={{
+              fontWeight: "bold",
+              background:
+                "linear-gradient(90deg, rgba(21,100,53,1) 0%, rgba(0,162,216,1) 50%)",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}
           >
             Contact Us
           </Typography>
@@ -161,9 +167,10 @@ const Form = () => {
               variant="contained"
               sx={{
                 height: "48px",
-                backgroundColor: "#0d6efd",
-                color: "#fff",
-                "&:hover": { backgroundColor: "#0d6efd" },
+                background:
+                  "linear-gradient(90deg, rgba(21,100,53,1) 0%, rgba(0,162,216,1) 50%)",
+                color: "#FFFFFF",
+                color: "#FFFFFF",
                 borderRadius: "8px",
                 fontSize: "16px",
                 fontWeight: "bold",

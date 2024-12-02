@@ -7,18 +7,20 @@ export default function PioneersSection() {
       container
       item
       xs={12}
+      spacing={5}
       sx={{
         justifyContent: "center",
         gap: "0.6rem",
-        display: { xs: "none", lg: "flex" },
-        marginTop: "40px",
-        height: "60vh",
+        display: { xs: "flex", lg: "flex" },
+        marginTop: "25px",
+        marginBottom: "40px",
+        height: "auto",
       }}
     >
       {pioneerData.map((item, index) => (
         <Grid
           item
-          xs={12}
+          xs={5}
           sm={6}
           md={2.5}
           key={index}

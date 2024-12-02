@@ -4,13 +4,15 @@ import PioneersSection from "./Pioneer";
 
 export default function AboutUrbanrise() {
   return (
-    <Grid sx={{ minHeight: "80vh", padding: "20px 50px" }}>
+    <Grid
+      sx={{ minHeight: "80vh", padding: { md: "20px 50px", xs: "20px 15px" } }}
+    >
       <Box>
         <Typography
           sx={{
             fontSize: "18px",
             marginTop: "20px",
-            marginBottom: "20px",
+            marginBottom: { md: "20px", xs: "10px" },
             width: "fit-content",
             // border: "1px solid black",
             padding: " 6px 10px",
@@ -26,10 +28,10 @@ export default function AboutUrbanrise() {
 
         <Typography
           sx={{
-            fontSize: "38px",
-            width: "80%",
+            fontSize: { md: "38px", xs: "18px" },
+            width: { md: "80%", xs: "100%" },
             letterSpacing: "2px",
-            lineHeight: "60px",
+            lineHeight: { md: "50px", xs: "30px" },
             background:
               "linear-gradient(90deg, rgba(21,100,53,1) 0%, rgba(0,162,216,1) 50%)",
             WebkitBackgroundClip: "text",

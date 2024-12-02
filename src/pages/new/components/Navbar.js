@@ -16,7 +16,8 @@ import {
   WifiCalling3Rounded,
 } from "@mui/icons-material";
 // import Logo from "../../../../public/images/logoNew.png";
-import Logo from "../../../../public/Images-new/logo.png";
+import Logo from "../../../../public/Images-new/logo.jpg";
+// import Logo from "../../../../public/Images-new/logo-removebg.png";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import { Fab, Fade, Grid, Slide, useScrollTrigger } from "@mui/material";
 import PropTypes from "prop-types";
@@ -79,7 +80,7 @@ function ElevationScroll(props) {
   return React.cloneElement(children, {
     elevation: trigger ? 4 : 0,
     style: {
-      backgroundColor: trigger ? "#FFFFFF" : "#E5E1DA",
+      backgroundColor: trigger ? "#FFFFFF" : "#ffffff3d",
       transition: "background-color 0.3s",
     },
   });
@@ -94,7 +95,7 @@ const pages = [
   { name: "Overview", id: "overview" },
   { name: "Amenities", id: "amenities" },
   { name: "Price", id: "price" },
-  { name: "Floor-Plan", id: "floorPlan" },
+  { name: "FloorPlan", id: "floorPlan" },
   { name: "Gallery", id: "Gallery" },
   { name: "Location", id: "locationmap" },
 ];
@@ -153,16 +154,16 @@ function Navbar({ setOpenEnquiry, props }) {
               <Grid
                 container
                 item
-                xs={3}
+                xs={4}
                 sm={2}
                 display="flex"
                 alignItems="center"
                 justifyContent="center"
                 sx={{
-                  height: { xs: "35px", sm: "50px" },
+                  height: { xs: "40px", sm: "45px" },
                   overflow: "hidden",
                   position: "relative",
-                  // marginLeft:'10px'
+                  paddingLeft: "20px",
                 }}
               >
                 <Image
@@ -180,7 +181,7 @@ function Navbar({ setOpenEnquiry, props }) {
               <Grid
                 container
                 item
-                xs={8}
+                xs={7}
                 sm={5}
                 sx={{ visibility: { xs: "hidden", md: "visible" } }}
               >
@@ -200,6 +201,7 @@ function Navbar({ setOpenEnquiry, props }) {
                         scrollToView(`#${item.id}`);
                       }}
                       sx={{
+                        display: "block",
                         fontSize: "15px",
                         padding: "5px 10px",
                         //color: themeColors?.primary,
@@ -208,7 +210,7 @@ function Navbar({ setOpenEnquiry, props }) {
                           backgroundColor: "blue",
                           fontWeight: "bold",
                         },
-                        //fontWeight: selectedSection === item ? "bold" : "none",
+                        fontWeight: "bold",
                         textTransform: "uppercase",
                         cursor: "pointer",
                         borderRadius: "10px",

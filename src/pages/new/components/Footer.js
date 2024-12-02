@@ -28,12 +28,12 @@ function FooterSection() {
         }}
       >
         {/* Explore Section */}
-        <Grid item xs={12} sm={6} md={3}>
+        <Grid item xs={6} sm={6} md={3}>
           <Typography
             fontWeight={600}
             sx={{
               fontSize: { xs: "20px", lg: "24px" },
-              marginBottom: "10px",
+              marginBottom: "15px",
             }}
           >
             Explore
@@ -48,38 +48,39 @@ function FooterSection() {
             {[
               { name: "Overview", id: "overview" },
               { name: "Amenities", id: "amenities" },
-              { name: "Price", id: "price" },
+              { name: "Price Details", id: "price" },
               { name: "Floor-Plan", id: "floorPlan" },
               { name: "Gallery", id: "Gallery" },
               { name: "Location", id: "locationmap" },
             ].map((item, index) => (
-              <li key={index} style={{ marginBottom: "10px" }}>
-                <Button
+              <Grid container item xs={12}>
+                <Typography
+                  key={index}
                   onClick={() => {
                     scrollToView(`#${item.id}`);
                   }}
                   color="inherit"
                   underline="hover"
+                  sx={{
+                    fontSize: {
+                      xs: "14px",
+                      lg: "14px",
+                      textTransform: "uppercase",
+                    },
+                    padding: "0px",
+                    marginBottom: { md: "30px", xs: "20px" },
+                    cursor: "pointer",
+                  }}
                 >
-                  <Typography
-                    sx={{
-                      fontSize: {
-                        xs: "14px",
-                        lg: "16px",
-                        textTransform: "capitalize",
-                      },
-                    }}
-                  >
-                    {item.name}
-                  </Typography>
-                </Button>
-              </li>
+                  {item.name}
+                </Typography>
+              </Grid>
             ))}
           </ul>
         </Grid>
 
         {/* Site and Corporate Address */}
-        <Grid item xs={12} sm={6} md={3}>
+        <Grid item xs={6} sm={6} md={3}>
           <Typography
             fontWeight={600}
             sx={{ fontSize: { xs: "20px", lg: "24px" }, marginBottom: "10px" }}
@@ -131,6 +132,7 @@ function FooterSection() {
             sx={{
               fontSize: { xs: "20px", lg: "24px" },
               marginBottom: "10px",
+              marginTop: { md: 0, xs: "20px" },
             }}
           >
             Location
@@ -151,8 +153,8 @@ function FooterSection() {
         sx={{
           width: "100%",
           textAlign: "center",
-          marginTop: "30px",
-          fontSize: "14px",
+          marginTop: "40px",
+          fontSize: { md: "14px", xs: "10px" },
         }}
       >
         ©2024 Urbanrise THE WORLD OF JOY. All Rights Reserved

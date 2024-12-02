@@ -11,6 +11,8 @@ import threeBHK1 from "../../../../public/Images-new/3bhk5-300x190.webp";
 import threeBHK2 from "../../../../public/Images-new/3bhk4-300x190.webp";
 import threeBHK3 from "../../../../public/Images-new/3bhk3-300x190.webp";
 import master from "../../../../public/Images-new/master-1110x1536.webp";
+import { Box, IconButton, Modal } from "@mui/material";
+import { CloseOutlined } from "@mui/icons-material";
 
 const data = [
   {
@@ -51,6 +53,17 @@ export default function FloorPlan() {
   const content = data[0];
   const [selectedImgType, setSelectedImgType] = useState([1]);
   const [galleryImgList, setGalleryImgList] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
+
+  const handleOpenModal = (img) => {
+    setSelectedImage(img);
+    setOpenModal(true);
+  };
 
   const exteriorImg = [
     { item: twoBHK, alt: "2bhk", title: "2BHK REGULAR – WEST FACING" },
@@ -104,7 +117,7 @@ export default function FloorPlan() {
           component="h1"
           sx={{
             padding: "10px 0 10px 0",
-            fontSize: { xs: "14px", sm: "35px" },
+            fontSize: { xs: "20px", sm: "35px" },
             fontWeight: "bolder",
             background:
               "linear-gradient(90deg, rgba(21,100,53,1) 0%, rgba(0,162,216,1) 50%)",
@@ -129,7 +142,8 @@ export default function FloorPlan() {
           component="h1"
           sx={{
             padding: "3px 0 10px 0",
-            fontSize: { xs: "14px", sm: "16px" },
+            fontSize: { xs: "13px", sm: "16px" },
+            textAlign: "center",
           }}
         >
           {
@@ -219,12 +233,14 @@ export default function FloorPlan() {
               }}
             >
               <Image
+                onClick={() => handleOpenModal(val.item)}
                 src={val.item}
                 alt={val.alt}
                 style={{
                   height: "80%",
                   width: "auto",
                   objectFit: "cover",
+                  cursor: "pointer",
                 }}
                 sizes="100vw"
               />
@@ -243,6 +259,47 @@ export default function FloorPlan() {
           </Grid>
         ))}
       </Grid>
+
+      {/* Modal */}
+      <Modal
+        open={openModal}
+        onClose={handleCloseModal}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Box
+          sx={{
+            position: "relative",
+            maxWidth: "80vw",
+            height: "80vh",
+          }}
+        >
+          <IconButton
+            onClick={handleCloseModal}
+            sx={{
+              position: "absolute",
+              top: "10px",
+              right: "10px",
+              fontWeight: "bold",
+              color: "black",
+            }}
+          >
+            <CloseOutlined fontSize="large" />
+          </IconButton>
+          <Image
+            src={selectedImage}
+            alt="image"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "contain",
+            }}
+          />
+        </Box>
+      </Modal>
     </Grid>
   );
 }

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Navbar from "./components/Navbar";
-import HeroSection from "./components/HeroSection";
 import Overview from "./components/Overview";
 import Walkin from "./components/Walkin";
 import PriceDetails from "./components/PriceDetails";
@@ -15,6 +14,8 @@ import EnquiryFormPopup from "./components/EnquiryFormPopup";
 import Slideshow from "./components/Slider";
 import FooterSection from "./components/Footer";
 import AboutUrbanrise from "./components/AboutUrbanrise";
+import HeroSection from "./components/HeroSection";
+import { Button, Grid } from "@mui/material";
 
 export const getUtmParams = (pageQueryParams) => {
   const source = pageQueryParams?.utm_source || "Direct Traffic";
@@ -55,6 +56,11 @@ export default function Home() {
       setPhoneNumber("+91 9811574070");
     }
   }, [router?.query]);
+
+  const handleButtonClick = () => {
+    window.open(`tel:${phoneNumber}`);
+  };
+
   return (
     <>
       <Head>
@@ -80,6 +86,53 @@ export default function Home() {
       <AboutUrbanrise />
       <Form />
       <FooterSection />
+      <Grid
+        item
+        xs={12}
+        sx={{
+          display: { xs: "flex", sm: "none" },
+          justifyContent: "space-between",
+          position: "fixed",
+          bottom: 0,
+          width: "100%",
+          zIndex: "10",
+        }}
+      >
+        <Button
+          onClick={handleButtonClick}
+          style={{
+            width: "50%",
+            height: "47px",
+            background:
+              "linear-gradient(90deg, rgba(21,100,53,1) 0%, rgba(0,162,216,1) 50%)",
+            color: "#FFFFFF",
+            textTransform: "capitalize",
+            fontWeight: "bold",
+            fontSize: "16px",
+            animation: " zoomAnimation 2s ease infinite",
+          }}
+          variant="contained"
+        >
+          Call Now
+        </Button>
+        <Button
+          onClick={() => setOpenEnquiry(true)}
+          style={{
+            width: "50%",
+            height: "47px",
+            background:
+              "linear-gradient(90deg, rgba(21,100,53,1) 0%, rgba(0,162,216,1) 50%)",
+            color: "#FFFFFF",
+            textTransform: "capitalize",
+            fontWeight: "bold",
+            fontSize: "16px",
+            animation: " zoomAnimation 2s ease infinite",
+          }}
+          variant="contained"
+        >
+          Get Cost Sheet
+        </Button>
+      </Grid>
     </>
   );
 }
