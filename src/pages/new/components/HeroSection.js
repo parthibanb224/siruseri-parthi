@@ -141,19 +141,19 @@ import Image from "next/image";
 import { Box, Grid, IconButton, useMediaQuery } from "@mui/material";
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 
-import Banner1 from "../../../../public/Images-new/Banners/TWOJ Banner 1- Size 1.png";
-import Banner2 from "../../../../public/Images-new/Banners/TWOJ Banner 2- Size 1.png";
-import Banner3 from "../../../../public/Images-new/Banners/TWOJ Banner 3- Size 1.png";
-import Banner4 from "../../../../public/Images-new/Banners/TWOJ Banner 4- Size 1.png";
-import Banner5 from "../../../../public/Images-new/Banners/TWOJ Banner 5- Size 1.jpg";
-import Banner6 from "../../../../public/Images-new/Banners/TWOJ Banner 6- Size 1.jpg";
+import Banner1 from "../../../../public/Images-new/Set-1/1.jpg";
+import Banner2 from "../../../../public/Images-new/Set-1/2.jpg";
+import Banner3 from "../../../../public/Images-new/Set-1/3.jpg";
+import Banner4 from "../../../../public/Images-new/Set-1/4.jpg";
+import Banner5 from "../../../../public/Images-new/Set-1/5.jpg";
+import Banner6 from "../../../../public/Images-new/Set-1/6.jpg";
 
-import BannerMobile1 from "../../../../public/Images-new/Banners/TWOJ Banner 1- Size 2.png";
-import BannerMobile2 from "../../../../public/Images-new/Banners/TWOJ Banner 2- Size 2.png";
-import BannerMobile3 from "../../../../public/Images-new/Banners/TWOJ Banner 3- Size 2.png";
-import BannerMobile4 from "../../../../public/Images-new/Banners/TWOJ Banner 4- Size 2.png";
-import BannerMobile5 from "../../../../public/Images-new/Banners/TWOJ Banner 5- Size 2.png";
-import BannerMobile6 from "../../../../public/Images-new/Banners/TWOJ Banner 6- Size 2.png";
+import BannerMobile1 from "../../../../public/Images-new/Set-1/1mob.jpg";
+import BannerMobile2 from "../../../../public/Images-new/Set-1/2mob.jpg";
+import BannerMobile3 from "../../../../public/Images-new/Set-1/3mob.jpg";
+import BannerMobile4 from "../../../../public/Images-new/Set-1/4mob.jpg";
+import BannerMobile5 from "../../../../public/Images-new/Set-1/5mob.jpg";
+import BannerMobile6 from "../../../../public/Images-new/Set-1/6mob.jpg";
 
 // Desktop and Mobile Banners
 const desktopBanners = [Banner1, Banner2, Banner3, Banner4, Banner5, Banner6];
