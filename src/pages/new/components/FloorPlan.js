@@ -13,6 +13,13 @@ import threeBHK3 from "../../../../public/Images-new/3bhk3-300x190.webp";
 import master from "../../../../public/Images-new/master-1110x1536.webp";
 import { Box, IconButton, Modal } from "@mui/material";
 import { CloseOutlined } from "@mui/icons-material";
+import gsap from "gsap";
+
+if (typeof window !== "undefined") {
+  import("gsap/ScrollTrigger").then((ScrollTrigger) => {
+    gsap.registerPlugin(ScrollTrigger.ScrollTrigger);
+  });
+}
 
 const data = [
   {
@@ -89,6 +96,26 @@ export default function FloorPlan() {
     setSelectedImgType([id]);
   };
 
+  React.useEffect(() => {
+    // GSAP animation to move text from bottom to top
+    gsap.fromTo(
+      ".navbar-text",
+      { y: 50, opacity: 0 }, // Initial state (text starts from below and is invisible)
+      {
+        y: 0,
+        opacity: 1,
+        duration: 3,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".navbar-text",
+          start: "top 80%",
+          end: "bottom 50%",
+          toggleActions: "play none none none",
+        },
+      } // Final state (text moves to its position and becomes visible)
+    );
+  }, []);
+
   return (
     <Grid
       id="floorPlan"
@@ -103,6 +130,7 @@ export default function FloorPlan() {
         paddingY: "60px",
         justifyContent: "center",
       }}
+      className="navbar-text"
     >
       <Grid
         container

@@ -22,6 +22,13 @@ import interior5 from "../../../../public/Images-new/interier5.jpg";
 import interior6 from "../../../../public/Images-new/interier6.jpg";
 import interior7 from "../../../../public/Images-new/interier7.jpg";
 import interior8 from "../../../../public/Images-new/interier8.jpg";
+import gsap from "gsap";
+
+if (typeof window !== "undefined") {
+  import("gsap/ScrollTrigger").then((ScrollTrigger) => {
+    gsap.registerPlugin(ScrollTrigger.ScrollTrigger);
+  });
+}
 
 const data = [
   {
@@ -87,6 +94,26 @@ export default function Gallery({}) {
     }
   }, [selectedImgType]);
 
+  React.useEffect(() => {
+    // GSAP animation to move text from bottom to top
+    gsap.fromTo(
+      ".navbar-text",
+      { y: 50, opacity: 0 }, // Initial state (text starts from below and is invisible)
+      {
+        y: 0,
+        opacity: 1,
+        duration: 3,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".navbar-text",
+          start: "top 80%",
+          end: "bottom 50%",
+          toggleActions: "play none none none",
+        },
+      } // Final state (text moves to its position and becomes visible)
+    );
+  }, []);
+
   return (
     <Grid
       id="Gallery"
@@ -101,6 +128,7 @@ export default function Gallery({}) {
         padding: { xs: "30px 0 30px 0", sm: "20px 0 20px 0" },
         justifyContent: "center",
       }}
+      className="navbar-text"
     >
       <Grid
         container

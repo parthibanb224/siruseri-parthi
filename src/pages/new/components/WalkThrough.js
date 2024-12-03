@@ -2,6 +2,13 @@ import React, { Suspense } from "react";
 import Grid from "@mui/material/Grid";
 import PropTypes from "prop-types";
 import Typography from "@mui/material/Typography";
+import gsap from "gsap";
+
+if (typeof window !== "undefined") {
+  import("gsap/ScrollTrigger").then((ScrollTrigger) => {
+    gsap.registerPlugin(ScrollTrigger.ScrollTrigger);
+  });
+}
 
 const data = [
   {
@@ -22,6 +29,27 @@ const data = [
 
 export default function WalkThrough({}) {
   const content = data[0];
+
+  React.useEffect(() => {
+    // GSAP animation to move text from bottom to top
+    gsap.fromTo(
+      ".navbar-text",
+      { y: 50, opacity: 0 }, // Initial state (text starts from below and is invisible)
+      {
+        y: 0,
+        opacity: 1,
+        duration: 3,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".navbar-text",
+          start: "top 80%",
+          end: "bottom 50%",
+          toggleActions: "play none none none",
+        },
+      } // Final state (text moves to its position and becomes visible)
+    );
+  }, []);
+
   return (
     <Grid
       container
@@ -48,6 +76,7 @@ export default function WalkThrough({}) {
           display: "flex",
           justifyContent: "center",
         }}
+        className="navbar-text"
       >
         <Typography
           component="h1"
@@ -74,6 +103,7 @@ export default function WalkThrough({}) {
           display: "flex",
           justifyContent: "center",
         }}
+        className="navbar-text"
       >
         <Typography
           component="h1"

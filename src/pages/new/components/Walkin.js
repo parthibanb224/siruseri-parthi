@@ -1,11 +1,7 @@
-import { Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import gsap from "gsap";
 import Image from "next/image";
 import React, { useEffect, useRef } from "react";
-// import Img1 from "../../../../public/Images-new/4-1-768x559.jpg";
-// import Img2 from "../../../../public/Images-new/Co-working-Spaces-1-768x432.jpg";
-// import Img3 from "../../../../public/Images-new/tower-to-tower.jpg";
-// import Img4 from "../../../../public/Images-new/1-4-768x559.jpg";
 
 if (typeof window !== "undefined") {
   import("gsap/ScrollTrigger").then((ScrollTrigger) => {
@@ -14,78 +10,75 @@ if (typeof window !== "undefined") {
 }
 
 export default function Walkin() {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const sections = useRef([]);
 
-  const sectionRef = useRef([]);
+  useEffect(() => {
+    sections.current.forEach((section, index) => {
+      const text = section.querySelector(".text");
+      const image = section.querySelector(".image");
 
-  // useEffect(() => {
-  //   sectionRef.current.forEach((section, index) => {
-  //     const text = section.querySelector(".text");
-  //     const image = section.querySelector(".image");
+      gsap.fromTo(
+        text,
+        { x: "-100%", opacity: 0 },
+        {
+          x: "0%",
+          opacity: 1,
+          duration: 1.5,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: text,
+            start: "top 80%",
+            end: "bottom 50%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
 
-  //     gsap.fromTo(
-  //       text,
-  //       { x: "-100%", opacity: 0 },
-  //       {
-  //         x: "0%",
-  //         opacity: 1,
-  //         duration: 1.5,
-  //         ease: "power3.out",
-  //         scrollTrigger: {
-  //           trigger: text,
-  //           start: "top 80%",
-  //           end: "bottom 50%",
-  //           toggleActions: "play none none none",
-  //         },
-  //       }
-  //     );
+      gsap.fromTo(
+        image,
+        { x: window.innerWidth, opacity: 0 },
+        {
+          x: "0%",
+          opacity: 1,
+          duration: 1.5,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: image,
+            start: "top 80%",
+            end: "bottom 50%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    });
+  }, []);
 
-  //     gsap.fromTo(
-  //       image,
-  //       { x: window.innerWidth, opacity: 0 },
-  //       {
-  //         x: "0%",
-  //         opacity: 1,
-  //         duration: 1.5,
-  //         ease: "power3.out",
-  //         scrollTrigger: {
-  //           trigger: image,
-  //           start: "top 80%",
-  //           end: "bottom 50%",
-  //           toggleActions: "play none none none",
-  //         },
-  //       }
-  //     );
-  //   });
-  // }, []);
-
-  const sections = [
+  const sectionData = [
     {
-      imgSrc: "/Images-new/4-1-768x559.jpg",
+      image: "/Images-new/4-1-768x559.jpg",
       title: "45K SQFT COSMO CLUBHOUSE",
-      content:
+      description:
         "An exclusive world-class club house spread over 45,000 Sq. Ft. of land invites you to the world of luxury beyond imagination. The magnificent area with contemporary design, upscale decor and latest indoor amenities is the perfect gateway to a life of fun and joy. The wide range of facilities in the club house ranges from beautiful spacious party hall to a world of indoor games like Table Tennis, Chess, and more.",
       reverse: false,
     },
     {
-      imgSrc: "/Images-new/Co-working-Spaces-1-768x432.jpg",
+      image: "/Images-new/Co-working-Spaces-1-768x432.jpg",
       title: "15K SQFT OF CO-WORKING SPACES",
-      content:
+      description:
         "Experience a new dimension to ‘Working From Home’ at the sprawling Co-working spaces spread over 15,000 Sq.ft. Choose to work from the relaxing green environment in the beautiful landscaped park or scale new heights in your career working from the rooftop co-working spaces. Tailored to meet modern work needs, these co-working spaces balance work with relaxation, fun, and joy, transforming the typical work-from-home scenario into a more enjoyable, stress-free experience.",
       reverse: true,
     },
     {
-      imgSrc: "/Images-new/tower-to-tower.jpg",
+      image: "/Images-new/3-2-768x559.webp",
       title: "24K SQFT TOWER TO TOWER AMENITIES",
-      content:
+      description:
         "Innovation in every aspect of living is what The World of Joy offers you. Enjoy a wide range of games and activities like Shuttle Court, Snake Ladder & Chess Court laid out for you in the area between the towers. A smart usage of space extends beyond the walls of your home, the thoughtful planning adds a new dimension to living here.",
       reverse: false,
     },
     {
-      imgSrc: "/Images-new/1-4-768x559.jpg",
+      image: "/Images-new/1-4-768x559.jpg",
       title: "1+ ACRES GREEN PARK",
-      content:
+      description:
         "Embrace a life close to nature in the World of Joy. An exquisite park spread over 1 acre of land consisting of beautiful green manicured lawns, pathways, play areas and professional play ground invites you to lead an active, healthy and wholesome life.",
       reverse: true,
     },
@@ -93,183 +86,128 @@ export default function Walkin() {
 
   return (
     <Grid
-      container
-      item
-      xs={12}
-      alignItems="center"
-      justifyContent="center"
       sx={{
-        padding: "60px 20px",
-        backgroundImage: "url('/images/walkway-bg.png')",
+        // minHeight: "100vh",
+        marginTop: { xs: "0px", sm: "50px", md: "50px" },
+        overflow: "hidden",
+        backgroundImage: "url('/Images-new/walkway-bg.png')",
         backgroundSize: "cover",
         backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        padding: { xs: "0px", sm: "90px 10px", md: "90px 10px" },
       }}
     >
-      <Typography
+      {/* <Typography
         sx={{
           textAlign: "center",
           fontSize: { xs: "27px", md: "35px" },
           fontWeight: "bold",
           color: "#FFFFFF",
-          marginBottom: "10px",
+          marginBottom: "20px",
         }}
       >
         150+ NEW GEN AMENITIES
-      </Typography>
-      {sections.map((section, index) => (
-        <React.Fragment key={index}>
+      </Typography> */}
+
+      {sectionData.map((section, index) => (
+        <Grid
+          key={index}
+          ref={(el) => (sections.current[index] = el)}
+          sx={{
+            display: "flex",
+            minHeight: { xs: "fit-content", sm: "80vh", md: "80vh" },
+            padding: "20px",
+            width: "100%",
+            flexDirection: {
+              xs: "column", // Stack vertically for mobile
+              sm: index % 2 === 0 ? "row" : "row-reverse", // Row or row-reverse for larger screens
+            },
+          }}
+        >
+          {/* Image Section */}
           <Grid
-            ref={(el) => (sectionRef.current[index] = el)}
-            container
-            item
-            xs={12}
-            justifyContent="space-between"
-            alignItems="center"
-            paddingY="50px"
-          >
-            {isMobile || !section.reverse ? (
-              <>
-                <Grid
-                  className="image"
-                  container
-                  item
-                  xs={12}
-                  md={6}
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  sx={{
-                    height: { xs: "250px", sm: "500px" },
-                    overflow: "hidden",
-                    position: "relative",
-                    borderRadius: "30px",
-                  }}
-                >
-                  <Image
-                    src={section.imgSrc}
-                    alt="Walkway Image"
-                    style={{
-                      height: "100%",
-                      width: "auto",
-                      objectFit: "cover",
-                      borderRadius: "30px",
-                    }}
-                    sizes="100vw"
-                  />
-                </Grid>
-                <Grid
-                  className="text"
-                  container
-                  item
-                  xs={12}
-                  md={5.5}
-                  sx={{
-                    height: "100%",
-                    padding: { md: "0 50px", xs: "0" },
-                    borderLeft: { md: "1px solid #FFFFFF", xs: "0" },
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      color: "#FFFFFF",
-                      fontSize: { md: "25px", xs: "18px" },
-                      textAlign: "left",
-                      marginBottom: "40px",
-                      marginTop: { md: 0, xs: "30px" },
-                    }}
-                  >
-                    {section.title}
-                  </Typography>
-                  <Typography
-                    sx={{
-                      color: "#FFFFFF",
-                      fontSize: { md: "20px", xs: "14px" },
-                      textAlign: "justify",
-                    }}
-                  >
-                    {section.content}
-                  </Typography>
-                </Grid>
-              </>
-            ) : (
-              <>
-                <Grid
-                  className="text"
-                  container
-                  item
-                  xs={12}
-                  md={5.5}
-                  sx={{
-                    height: "100%",
-                    padding: { md: "0 50px", xs: "0" },
-                    borderRight: { md: "1px solid #FFFFFF", xs: "0" },
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      color: "#FFFFFF",
-                      fontSize: { md: "25px", xs: "18px" },
-                      textAlign: "left",
-                      marginBottom: "40px",
-                      marginTop: { md: 0, xs: "30px" },
-                    }}
-                  >
-                    {section.title}
-                  </Typography>
-                  <Typography
-                    sx={{
-                      color: "#FFFFFF",
-                      fontSize: { md: "20px", xs: "14px" },
-                      textAlign: "justify",
-                    }}
-                  >
-                    {section.content}
-                  </Typography>
-                </Grid>
-                <Grid
-                  className="image"
-                  container
-                  item
-                  xs={12}
-                  md={6}
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  sx={{
-                    height: { xs: "250px", sm: "500px" },
-                    overflow: "hidden",
-                    position: "relative",
-                    borderRadius: "30px",
-                  }}
-                >
-                  <Image
-                    src={section.imgSrc}
-                    alt="Walkway Image"
-                    style={{
-                      height: "100%",
-                      width: "auto",
-                      objectFit: "cover",
-                      borderRadius: "30px",
-                    }}
-                    sizes="100vw"
-                  />
-                </Grid>
-              </>
-            )}
-          </Grid>
-          <Grid
-            container
-            item
-            xs={12}
             sx={{
-              borderBottom: "1px solid #FFFFFF",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              marginBottom: "60px",
+              width: { xs: "100%", sm: "60%" }, // Full width on mobile
             }}
-          />
-        </React.Fragment>
+            className="image"
+          >
+            <Grid
+              sx={{
+                height: "100%",
+                overflow: "hidden",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <Box
+                sx={{
+                  position: "relative",
+                  width: { xs: "100%", sm: "80%" },
+                  height: { xs: "300px", sm: "100%" }, // Set a specific height for mobile
+                  transition: "transform 0.3s ease-in-out",
+                }}
+                className="image-box"
+              >
+                <Image
+                  src={section?.image}
+                  alt="Feature"
+                  priority={true}
+                  fill
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    objectFit: "cover", // Ensures the image covers the container
+                    borderRadius: "20px",
+                  }}
+                />
+              </Box>
+            </Grid>
+          </Grid>
+
+          {/* Text Section */}
+          <Grid
+            sx={{
+              width: { xs: "100%", sm: "35%" }, // Full width on mobile
+              display: "flex",
+              justifyContent: "center",
+              flexDirection: "column",
+              marginTop: { xs: "20px", sm: 0 }, // Add spacing for mobile
+            }}
+            className="text"
+          >
+            <Box>
+              <Typography
+                sx={{
+                  color: "white",
+                  fontSize: { xs: "20px", sm: "22px", md: "22px" },
+                  fontStyle: "italic",
+                  letterSpacing: "1px",
+                  fontFamily: "cursive",
+                  textAlign: { xs: "center", sm: "left" }, // Center text on mobile
+                  fontWeight: "bold",
+                }}
+              >
+                {section.title}
+              </Typography>
+            </Box>
+            <Box>
+              <Typography
+                sx={{
+                  color: "white",
+                  marginTop: { xs: "20px", sm: "30px", md: "30px" },
+                  letterSpacing: "1px",
+                  textAlign: { xs: "justify", sm: "justify" }, // Center text on mobile
+                  fontSize: { xs: "16px", sm: "18px", md: "18px" },
+                }}
+              >
+                {section.description}
+              </Typography>
+            </Box>
+          </Grid>
+        </Grid>
       ))}
     </Grid>
   );

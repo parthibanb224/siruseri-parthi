@@ -5,6 +5,12 @@ import Image from "next/image";
 import Img1 from "../../../../public/Images-new/Elevation1.jpg";
 import Img2 from "../../../../public/Images-new/igbc.png";
 
+if (typeof window !== "undefined") {
+  import("gsap/ScrollTrigger").then((ScrollTrigger) => {
+    gsap.registerPlugin(ScrollTrigger.ScrollTrigger);
+  });
+}
+
 export default function Overview() {
   useEffect(() => {
     // GSAP Animations
@@ -15,14 +21,37 @@ export default function Overview() {
     gsap.fromTo(
       image,
       { x: -500, opacity: 0 }, // starting position (left off-screen, transparent)
-      { x: 0, opacity: 1, duration: 1.5, ease: "power2.out" } // end position (normal, visible)
+      {
+        x: 0,
+        opacity: 1,
+        duration: 1.5,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: image,
+          start: "top 80%",
+          end: "bottom 50%",
+          toggleActions: "play none none none",
+        },
+      } // end position (normal, visible)
     );
 
     // Animate text section from bottom to top
     gsap.fromTo(
       textSection,
       { y: 200, opacity: 0 }, // starting position (bottom, transparent)
-      { y: 0, opacity: 1, duration: 1.5, ease: "power2.out", stagger: 0.3 } // end position (normal, visible)
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1.5,
+        ease: "power2.out",
+        stagger: 0.3,
+        scrollTrigger: {
+          trigger: textSection,
+          start: "top 80%",
+          end: "bottom 50%",
+          toggleActions: "play none none none",
+        },
+      } // end position (normal, visible)
     );
   }, []);
   return (
@@ -97,11 +126,19 @@ export default function Overview() {
           />
         </Grid>
       </Grid>
-      <Grid container item xs={11} md={5.5} flexDirection="column" spacing={2}>
+      <Grid
+        container
+        item
+        xs={11}
+        md={5.5}
+        id="image"
+        flexDirection="column"
+        spacing={2}
+      >
         <Grid container item xs={12} marginBottom="30px">
           <Typography
             sx={{
-              fontSize: { xs: "25px", md: "30px" },
+              fontSize: { xs: "22px", md: "28px" },
               marginBottom: "30px",
               fontWeight: "bold",
               background:
@@ -109,6 +146,7 @@ export default function Overview() {
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
               textAlign: "center",
+              textTransform: "uppercase",
             }}
           >
             Urbanrise The World of Joy: Where Luxury Meets Nature

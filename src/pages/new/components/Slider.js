@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import gsap from "gsap";
 import { EffectFade, Navigation, Pagination, Autoplay } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -9,6 +10,7 @@ import "swiper/css/pagination";
 import Image from "next/image";
 import { Box, Grid, IconButton, Typography } from "@mui/material";
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
+import CircleIcon from "@mui/icons-material/Circle";
 // import Elevetion1 from "../../../../public/Images-new/Slide1.jpg";
 import Elevetion1 from "../../../../public/Images-new/living-room-8578263_1280.jpeg";
 import Elevetion2 from "../../../../public/Images-new/Slide2.jpg";
@@ -17,8 +19,35 @@ import Elevetion4 from "../../../../public/Images-new/1-768x559.jpg";
 import Elevetion5 from "../../../../public/Images-new/Slide5.jpg";
 import Elevetion from "../../../../public/Images-new/Slide4.jpg";
 
+if (typeof window !== "undefined") {
+  import("gsap/ScrollTrigger").then((ScrollTrigger) => {
+    gsap.registerPlugin(ScrollTrigger.ScrollTrigger);
+  });
+}
+
 export default function Slideshow() {
   const sliderRef = useRef();
+
+  React.useEffect(() => {
+    // GSAP animation to move text from bottom to top
+    gsap.fromTo(
+      ".navbar-text",
+      { y: 50, opacity: 0 }, // Initial state (text starts from below and is invisible)
+      {
+        y: 0,
+        opacity: 1,
+        duration: 3,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".navbar-text",
+          start: "top 80%",
+          end: "bottom 50%",
+          toggleActions: "play none none none",
+        },
+      } // Final state (text moves to its position and becomes visible)
+    );
+  }, []);
+
   const slides = [
     {
       text: "REIMAGINING & REINVENTING",
@@ -27,79 +56,77 @@ export default function Slideshow() {
       content2: [
         <Typography
           sx={{
-            fontSize: { md: "18px", xs: "16px" },
+            fontSize: { md: "17px", xs: "16px" },
             mb: 2,
             textAlign: "justify",
           }}
           key="1"
           variant="body1"
         >
-          <span style={{ fontSize: "15px" }}>🔷</span>{" "}
-          <strong>Furnished Apartments:</strong> Discover the pinnacle of
-          comfort with thoughtfully furnished residences, complete with
-          climate-controlled living spaces, stylishly fitted wardrobes, and a
-          state-of-the-art modular kitchen, tailored for modern living.
+          <strong>Furnished Apartments:</strong> We have reimagined and
+          reinvented our apartment interiors and converted them from bare shell
+          apartments to furnished homes. Apartments at The World of Joy are pre
+          fitted with Modular Kitchen and Wardrobes in every bedroom. This
+          solves the problem of home buyers having to hire contractors to
+          install Modular Kitchen and Wardrobes.
         </Typography>,
         <Typography
           sx={{
-            fontSize: { md: "18px", xs: "16px" },
+            fontSize: { md: "17px", xs: "16px" },
             mb: 2,
             textAlign: "justify",
           }}
           key="2"
           variant="body1"
         >
-          <span style={{ fontSize: "15px" }}>🔷</span>{" "}
-          <strong>Air-conditioned Apartments:</strong> Enjoy unparalleled ease
-          with pre-fitted, high-performance air-conditioning systems that
-          provide a seamless, luxurious cooling experience from the moment you
-          step inside.
+          <strong>Air-conditioned Apartments:</strong> Every apartment at The
+          World of Joy is pre-fitted with Air Conditioners in the living room
+          and all the bedrooms. This solves the problem of home buyers having to
+          buy expensive air conditioners and have them fitted out of their own
+          pocket.
         </Typography>,
       ],
     },
     {
       text: "REIMAGINING & REINVENTING",
       image: Elevetion3,
-      content: "INFRASTRUCTURE WITH SMART FLOOD PREVENTION SYSTEMS",
+      content: "APARTMENT PROJECT WITH FLOOD PREVENTION MEASURES",
       content2: [
         <Typography
           sx={{
-            fontSize: { md: "18px", xs: "16px" },
+            fontSize: { md: "17px", xs: "16px" },
             mb: 2,
             textAlign: "justify",
           }}
           key="1"
           variant="body1"
         >
-          <span style={{ fontSize: "15px" }}>🔷</span>{" "}
           <strong>Landfill Project Area:</strong> The project area is raised by
           a minimum of 1 meter above the approach road level to prevent
           flooding.
         </Typography>,
         <Typography
           sx={{
-            fontSize: { md: "18px", xs: "16px" },
+            fontSize: { md: "17px", xs: "16px" },
             mb: 2,
             textAlign: "justify",
           }}
           key="2"
           variant="body1"
         >
-          <span style={{ fontSize: "15px" }}>🔷</span>
           <strong>Flood Barriers:</strong> Barriers are installed at main
           entrance and basement entry points to prevent water from entering the
           community.
         </Typography>,
         <Typography
           sx={{
-            fontSize: { md: "18px", xs: "16px" },
+            fontSize: { md: "17px", xs: "16px" },
             mb: 2,
             textAlign: "justify",
           }}
           key="3"
           variant="body1"
         >
-          <span style={{ fontSize: "15px" }}>🔷</span>{" "}
           <strong>Vehicle & Generator Safety:</strong> These measures ensure
           that vehicles and diesel generators remain safe and operational during
           power failures and flood situations.
@@ -113,105 +140,85 @@ export default function Slideshow() {
       content2: [
         <Typography
           sx={{
-            fontSize: { md: "18px", xs: "16px" },
+            fontSize: { md: "17px", xs: "16px" },
             mb: 2,
             textAlign: "justify",
           }}
           key="1"
           variant="body1"
         >
-          <span style={{ fontSize: "15px" }}>🔷</span> Tackling the problem of
-          dirty and neglected building rooftops, we’ve transformed these unused
-          areas into 75,000 sqft of premium rooftop amenities.
+          Tackling the problem of dirty and neglected building rooftops, we have
+          reimagined and reinvented these dirty and neglected areas and
+          converted them into{" "}
+          <strong>75,000 sqft of premium rooftop amenities</strong>.
         </Typography>,
         <Typography
           sx={{
-            fontSize: { md: "18px", xs: "16px" },
+            fontSize: { md: "17px", xs: "16px" },
             mb: 2,
             textAlign: "justify",
           }}
           key="2"
           variant="body1"
         >
-          <span style={{ fontSize: "15px" }}>🔷</span>Designed to prevent water
-          leakage and enhance the living experience, these spaces now feature
-          leisure, fitness, and social areas, along with green zones for a
-          healthier lifestyle.
-        </Typography>,
-        <Typography
-          sx={{
-            fontSize: { md: "18px", xs: "16px" },
-            mb: 2,
-            textAlign: "justify",
-          }}
-          key="3"
-          variant="body1"
-        >
-          <span style={{ fontSize: "15px" }}>🔷</span> Our innovative solution
-          not only ensures a cleaner environment but also adds tremendous value
-          to the community, making the rooftops a vibrant, functional part of
-          daily life.
+          Designed to prevent water leakage and enhance the living experience,
+          these spaces now feature family friendly entertainment facilities
+          offering breath taking views, fresh air and a sense of tranquility.
         </Typography>,
       ],
     },
     {
       text: "REIMAGINING & REINVENTING",
       image: Elevetion2,
-      content:
-        "SPACES THROUGH SUSTAINABLE PRACTICES AND ENVIRONMENTAL INTELLIGENCE",
+      content: "SPACES THROUGH SUSTAINABLE FEATURES",
       content2: [
         <Typography
           sx={{
-            fontSize: { md: "18px", xs: "16px" },
+            fontSize: { md: "17px", xs: "16px" },
             mb: 2,
             textAlign: "justify",
           }}
           key="1"
           variant="body1"
         >
-          <span style={{ fontSize: "15px" }}>🔷</span>
-          <strong>100% Solar Power Generation:</strong> Solar panels power the
-          entire community, eliminating electricity bills and ensuring
-          uninterrupted power supply.
+          <strong>Solar Power Generation:</strong> Solar panels generate green
+          power sufficient for all the common areas.
         </Typography>,
         <Typography
           sx={{
-            fontSize: { md: "18px", xs: "16px" },
+            fontSize: { md: "17px", xs: "16px" },
             mb: 2,
             textAlign: "justify",
           }}
           key="2"
           variant="body1"
         >
-          <span style={{ fontSize: "15px" }}>🔷</span>{" "}
-          <strong>Organic Waste Management:</strong> All organic waste is
-          transformed into nutrient-rich manure, promoting eco-friendly waste
-          disposal.
-        </Typography>,
-        <Typography
-          sx={{
-            fontSize: { md: "18px", xs: "16px" },
-            mb: 2,
-            textAlign: "justify",
-          }}
-          key="3"
-          variant="body1"
-        >
-          <span style={{ fontSize: "15px" }}>🔷</span>
           <strong>IGBC Gold Certification:</strong> Enhanced construction with
           cooler paints, advanced glass for temperature control, and superior
           materials for better heat resistance.
         </Typography>,
         <Typography
           sx={{
-            fontSize: { md: "18px", xs: "16px" },
+            fontSize: { md: "17px", xs: "16px" },
+            mb: 2,
+            textAlign: "justify",
+          }}
+          key="3"
+          variant="body1"
+        >
+          <strong>Organic Waste Management:</strong> All organic waste is
+          transformed into nutrient-rich manure, promoting eco-friendly waste
+          disposal.
+        </Typography>,
+        <Typography
+          sx={{
+            fontSize: { md: "17px", xs: "16px" },
             mb: 2,
             textAlign: "justify",
           }}
           key="4"
           variant="body1"
         >
-          <span style={{ fontSize: "15px" }}>🔷</span>{" "}
           <strong>Water-Saving Fixtures:</strong> Low-flow fixtures
           significantly reduce water consumption without compromising comfort.
         </Typography>,
@@ -224,77 +231,56 @@ export default function Slideshow() {
       content2: [
         <Typography
           sx={{
-            fontSize: { md: "18px", xs: "16px" },
+            fontSize: { md: "17px", xs: "16px" },
             mb: 2,
             textAlign: "justify",
           }}
           key="1"
           variant="body1"
         >
-          <span style={{ fontSize: "15px" }}>🔷</span>{" "}
-          <strong>Urbanrise Genius:</strong> Balancing work and family can be
-          challenging. Most working parents face difficulty in providing support
-          to enhance their child’s skills. Urbanrise Genius is our dedicated
-          learning centre within the community for tuition, dance, music, art
-          cookery classes and more – helping your child thrive, without you ever
-          having to worry.
+          <strong>Urbanrise Genius:</strong> In every home today parents are
+          living with the guilt for their inability to give time to their
+          children to take them to maths tuitions, science tuitions, dance and
+          music classes. To solve this problem, Urbanrise has reimagined and
+          reinvented your child’s future by developing Urbanrise Genius, a
+          12,000 SFT of exclusive facility with classrooms for maths tuition,
+          physics tuition, chemistry tuition, dance, music, art classes and more
+          all within the safety and security of their community.
         </Typography>,
       ],
     },
     {
       text: "REIMAGINING & REINVENTING",
       image: Elevetion5,
-      content: "LOCATION CHOICES FOR DEVELOPING APARTMENT COMMUNITIES",
+      content: "LOCATION CHOICES FOR DEVELOPING APARTMENT PROJECTS",
       content2: [
         <Typography
           sx={{
-            fontSize: { md: "18px", xs: "16px" },
+            fontSize: { md: "17px", xs: "16px" },
             mb: 2,
             textAlign: "justify",
           }}
           key="1"
           variant="body1"
         >
-          <span style={{ fontSize: "15px" }}>🔷</span> Locations with abundant
-          water bodies & high groundwater tables.
+          Strategically set right next to South India’s largest IT Corridor at
+          SIPCOT IT Park in Siruseri and OMR and 3,500-acre wide Karanai Reserve
+          Forest, The World of Joy is located in close vicinity to Padupakkam
+          and Siruseri Lakes. This ensures Pristine air quality and abundant
+          ground water supply.
         </Typography>,
         <Typography
           sx={{
-            fontSize: { md: "18px", xs: "16px" },
+            fontSize: { md: "17px", xs: "16px" },
             mb: 2,
             textAlign: "justify",
           }}
           key="2"
           variant="body1"
         >
-          <span style={{ fontSize: "15px" }}>🔷</span> Located near Asia’s
-          largest IT hub, SIPCOT IT Park in Siruseri, and surrounded by the
-          expansive 3,500-acre Karanai Forest.
-        </Typography>,
-        <Typography
-          sx={{
-            fontSize: { md: "18px", xs: "16px" },
-            mb: 2,
-            textAlign: "justify",
-          }}
-          key="3"
-          variant="body1"
-        >
-          <span style={{ fontSize: "15px" }}>🔷</span>Pristine environments with
-          superior air quality for a healthier lifestyle.
-        </Typography>,
-        <Typography
-          sx={{
-            fontSize: { md: "18px", xs: "16px" },
-            mb: 2,
-            textAlign: "justify",
-          }}
-          key="4"
-          variant="body1"
-        >
-          <span style={{ fontSize: "15px" }}>🔷</span>Well-connected to the city
-          via OMR, Outer Ring Road, and upcoming metro developments, providing
-          easy access to key commercial and residential areas.
+          Well-connected to the city via OMR, Outer Ring Road, and upcoming
+          Siruseri Metro Station, providing easy access to key commercial and
+          residential areas.
         </Typography>,
       ],
     },
@@ -320,16 +306,17 @@ export default function Slideshow() {
           marginTop: "30px",
         }}
       >
-        <Box sx={{ width: { md: "80%", xs: "100%" } }}>
+        <Box sx={{ width: { md: "80%", xs: "100%" } }} className="navbar-text">
           <Typography
             sx={{
-              fontSize: { xs: "25px", md: "30px" },
+              fontSize: { xs: "22px", md: "28px" },
               textAlign: "center",
               fontWeight: "bold",
               background:
                 "linear-gradient(90deg, rgba(21,100,53,1) 0%, rgba(0,162,216,1) 50%)",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
+              textTransform: "uppercase",
             }}
           >
             Reimagining and Reinventing Everyday Living with Luxury,
@@ -401,7 +388,7 @@ export default function Slideshow() {
           xs={10}
           sm={10}
           sx={{
-            height: { xs: "780px", sm: "550px" },
+            height: { xs: "780px", sm: "500px" },
             zIndex: 0,
             overflow: "hidden",
           }}
@@ -484,7 +471,7 @@ export default function Slideshow() {
                         mb: 1,
                         letterSpacing: ".5px",
                         // color: "#355F2E",
-                        fontSize: { md: "35px", xs: "22px" },
+                        fontSize: { md: "30px", xs: "22px" },
                         background:
                           "linear-gradient(90deg, rgba(21,100,53,1) 0%, rgba(0,162,216,1) 50%)",
                         WebkitTextFillColor: "transparent",
@@ -497,7 +484,7 @@ export default function Slideshow() {
                     <Typography
                       sx={{
                         mb: 3,
-                        fontSize: { md: "15px", xs: "10px" },
+                        fontSize: { md: "13px", xs: "10px" },
                         letterSpacing: ".3px",
                       }}
                     >
@@ -505,15 +492,18 @@ export default function Slideshow() {
                     </Typography>
                     <Box>
                       {slide.content2.map((point, pointIndex) => (
-                        <div
-                          key={pointIndex}
-                          sx={{
-                            fontSize: { md: "18px", xs: "10px" },
-                            mb: 2,
-                          }}
-                        >
+                        <Box sx={{ display: "flex", gap: "10px" }}>
+                          <CircleIcon
+                            sx={{
+                              width: "10px",
+                              height: "10px",
+                              color: "#166536",
+                              fontSize: "14px",
+                              marginTop: "5px",
+                            }}
+                          />
                           {point}
-                        </div>
+                        </Box>
                       ))}
                     </Box>
                   </Grid>

@@ -10,6 +10,13 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import gsap from "gsap";
+
+if (typeof window !== "undefined") {
+  import("gsap/ScrollTrigger").then((ScrollTrigger) => {
+    gsap.registerPlugin(ScrollTrigger.ScrollTrigger);
+  });
+}
 
 const content = [
   {
@@ -59,6 +66,26 @@ export default function PriceDetails({ setOpenEnquiry }) {
 
   const data = content[0]; // Accessing the first item for rendering
 
+  React.useEffect(() => {
+    // GSAP animation to move text from bottom to top
+    gsap.fromTo(
+      ".navbar-text",
+      { y: 50, opacity: 0 }, // Initial state (text starts from below and is invisible)
+      {
+        y: 0,
+        opacity: 1,
+        duration: 3,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".navbar-text",
+          start: "top 80%",
+          end: "bottom 50%",
+          toggleActions: "play none none none",
+        },
+      } // Final state (text moves to its position and becomes visible)
+    );
+  }, []);
+
   return (
     <Grid
       id="price"
@@ -87,6 +114,7 @@ export default function PriceDetails({ setOpenEnquiry }) {
           display: "flex",
           justifyContent: "center",
         }}
+        className="navbar-text"
       >
         <Typography
           component="h1"
@@ -106,6 +134,7 @@ export default function PriceDetails({ setOpenEnquiry }) {
         xs={11}
         sm={9}
         sx={{ paddingTop: "20px", paddingBottom: "20px" }}
+        className="navbar-text"
       >
         <TableContainer component={Paper} sx={{ borderRadius: "14px" }}>
           <Table aria-label="simple table">

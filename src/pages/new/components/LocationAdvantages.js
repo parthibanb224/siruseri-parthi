@@ -6,6 +6,13 @@ import Typography from "@mui/material/Typography";
 import ExpandLessRoundedIcon from "@mui/icons-material/ExpandLessRounded";
 import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
 import locationMap from "../../../../public/nlpImages/location_map.jpg";
+import gsap from "gsap";
+
+if (typeof window !== "undefined") {
+  import("gsap/ScrollTrigger").then((ScrollTrigger) => {
+    gsap.registerPlugin(ScrollTrigger.ScrollTrigger);
+  });
+}
 
 const facilitiesList = (data) => {
   return (
@@ -137,6 +144,26 @@ export default function LocationAdvantages({}) {
   const [isFacilitiesEnabled] = useState(true);
   const [isOpenedFacilities, setIsOpenedFacilities] = useState([]);
 
+  React.useEffect(() => {
+    // GSAP animation to move text from bottom to top
+    gsap.fromTo(
+      ".navbar-text",
+      { y: 50, opacity: 0 }, // Initial state (text starts from below and is invisible)
+      {
+        y: 0,
+        opacity: 1,
+        duration: 3,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".navbar-text",
+          start: "top 80%",
+          end: "bottom 50%",
+          toggleActions: "play none none none",
+        },
+      } // Final state (text moves to its position and becomes visible)
+    );
+  }, []);
+
   return (
     <Grid
       id="locationmap"
@@ -152,6 +179,7 @@ export default function LocationAdvantages({}) {
         paddingY: "30px",
         justifyContent: "center",
       }}
+      className="navbar-text"
     >
       <Grid
         item

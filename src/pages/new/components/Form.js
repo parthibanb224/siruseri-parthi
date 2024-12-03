@@ -1,47 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, Grid, TextField, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
-import { useSnackbar } from "notistack";
-import { useRouter } from "next/router";
-import { useAddFormDataMutation } from "../../../reduxSlice/apiSlice";
+import useForm from "@/useForm";
 
-const Form = () => {
-  const [userData, setUserData] = useState({
-    userName: "",
-    email: "",
-    phoneNo: "",
-  });
-  const [errorMsgs, setErrorMsgs] = useState({
-    userName: "",
-    email: "",
-    phoneNo: "",
-  });
-  const [isDirty, setIsDirty] = useState({
-    userName: false,
-    email: false,
-    phoneNo: false,
-  });
-
-  const { enqueueSnackbar } = useSnackbar();
-  const router = useRouter();
-  const [addFormData, { isLoading }] = useAddFormDataMutation();
-
-  const handleSubmit = () => {
-    if (Object.values(errorMsgs).some((msg) => msg)) return;
-
-    addFormData(userData)
-      .unwrap()
-      .then(() => {
-        setUserData({ userName: "", email: "", phoneNo: "" });
-        setIsDirty({ userName: false, email: false, phoneNo: false });
-        router.push("/thanku");
-      })
-      .catch(() => {
-        enqueueSnackbar("Something went wrong. Please try again.", {
-          variant: "error",
-        });
-      });
-  };
+export default function Form() {
+  const {
+    userData,
+    errorMsgs,
+    isLoading,
+    setUserData,
+    setIsDirty,
+    submitForm,
+  } = useForm();
 
   return (
     <Grid container sx={{ minHeight: "70vh" }}>
@@ -113,7 +83,12 @@ const Form = () => {
               onChange={(e) =>
                 setUserData({ ...userData, userName: e.target.value })
               }
-              onBlur={() => setIsDirty({ ...isDirty, userName: true })}
+              onBlur={() => {
+                setIsDirty((d) => ({
+                  ...d,
+                  userName: true,
+                }));
+              }}
               InputLabelProps={{ style: { color: "#ccc" } }}
               sx={{
                 "& .MuiOutlinedInput-root": {
@@ -132,7 +107,12 @@ const Form = () => {
               onChange={(e) =>
                 setUserData({ ...userData, email: e.target.value })
               }
-              onBlur={() => setIsDirty({ ...isDirty, email: true })}
+              onBlur={() => {
+                setIsDirty((d) => ({
+                  ...d,
+                  email: true,
+                }));
+              }}
               InputLabelProps={{ style: { color: "#ccc" } }}
               sx={{
                 "& .MuiOutlinedInput-root": {
@@ -151,7 +131,12 @@ const Form = () => {
               onChange={(e) =>
                 setUserData({ ...userData, phoneNo: e.target.value })
               }
-              onBlur={() => setIsDirty({ ...isDirty, phoneNo: true })}
+              onBlur={() => {
+                setIsDirty((d) => ({
+                  ...d,
+                  phoneNo: true,
+                }));
+              }}
               InputLabelProps={{ style: { color: "#ccc" } }}
               sx={{
                 "& .MuiOutlinedInput-root": {
@@ -162,14 +147,13 @@ const Form = () => {
               }}
             />
             <LoadingButton
+              onClick={() => submitForm()}
               loading={isLoading}
-              onClick={handleSubmit}
               variant="contained"
               sx={{
                 height: "48px",
                 background:
                   "linear-gradient(90deg, rgba(21,100,53,1) 0%, rgba(0,162,216,1) 50%)",
-                color: "#FFFFFF",
                 color: "#FFFFFF",
                 borderRadius: "8px",
                 fontSize: "16px",
@@ -183,6 +167,4 @@ const Form = () => {
       </Grid>
     </Grid>
   );
-};
-
-export default Form;
+}
